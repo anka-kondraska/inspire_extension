@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "My Cool Extension",
+  "version": "0.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": ["content.js"]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
+
+// https://developer.chrome.com/extensions/match_patterns
+// ["https://mail.google.com/*", "http://mail.google.com/*"] injects our script
+// into HTTPS and HTTP Gmail. If we have / at the end instead of /*, it matches the
+// URLs exactly, and so would only inject into https://mail.google.com/,
+// not https://mail.google.com/mail/u/0/#inbox. Usually that isn’t what you want.
+// http://*/* will match any http URL, but no other scheme. For example, this won’t
+// inject your script into https sites.
